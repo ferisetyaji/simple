@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block title %}User{% endblock %}
+{% block menu %}setting{% endblock %}
+{% block content %}
+<br>
+<ul class="path">
+	<li>Setting</li>
+	<li>></li>
+	<li>User</li>
+</ul>
+<h3>User</h3>
+<div class="clearfix"></div>
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah-user">Tambah</button>
+<div class="table-content">
+	<br>
+	<form method="post">
+		<table class="table table-bordered" id="myTable">
+			<thead>
+				<tr>
+					<th class="tb-no">No</th>
+					<th>Nama Pengguna</th>
+					<th>Username</th>
+					<th>No. Telp</th>
+					<th>Foto</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Pengguna 1</td>
+					<td>pengguna_1</td>
+					<td>09678678</td>
+					<td>Foto</td>
+					<td>Aktif</td>
+					<td>
+						<button type="button" class="btn btn-primary btn-xs edit-user">Edit</button>
+						<button type="button" class="btn btn-danger btn-xs hapus-user">Hapus</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<div class="clear"></div>
+</div>
+<div class="modal fade" id="modal-tambah-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tambah Data User</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-tambah-user" enctype="multipart/form-data">
+		    <div class="row">
+		    	<div class="col-sm-6">
+			      	<div class="form-group">
+			      		<label>Nama Pengguna</label>
+			      		<input type="text" class="form-control" name="nama_pengguna" placeholder="Masukan nama pengguna">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Email</label>
+			      		<input type="text" class="form-control" name="email" placeholder="Masukan nama email">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Username</label>
+			      		<input type="text" class="form-control" name="username" placeholder="Masukan username">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>File Upload</label>
+			      		<input type="file" class="form-control" name="upload">
+			      	</div>
+			    </div>
+			    <div class="col-sm-6">
+			    	<div class="form-group">
+			      		<label>No. Telephone</label>
+			      		<input type="number" class="form-control" name="kapasitas" placeholder="Masukan nomor telephone">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Group</label>
+			      		<select class="form-control" name="status">
+			      			<option value="">Pilih Group</option>
+			      		</select>
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Password</label>
+			      		<input type="password" class="form-control" name="password" placeholder="Masukan password">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Status</label>
+			      		<select class="form-control" name="status">
+			      			<option value="">Pilih Status</option>
+			      			<option>Aktif</option>
+			      			<option>Tidak Aktif</option>
+			      		</select>
+			      	</div>
+			    </div>
+			</div>
+			<input type="hidden" name="tambah" value="1">
+		</form>
+		<div class="form-group">
+			<button type="button" class="btn btn-primary simpan-tambah-user" style="float:right;">Simpan</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+		</div>
+		<div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-edit-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Data User</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-edit-user" enctype="multipart/form-data">
+		    <div class="row">
+		    	<div class="col-sm-6">
+			      	<div class="form-group">
+			      		<label>Nama Pengguna</label>
+			      		<input type="text" class="form-control" name="nama_pengguna" placeholder="Masukan nama pengguna">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Email</label>
+			      		<input type="text" class="form-control" name="email" placeholder="Masukan nama email">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Username</label>
+			      		<input type="text" class="form-control" name="username" placeholder="Masukan username">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>File Upload</label>
+			      		<input type="file" class="form-control" name="upload">
+			      	</div>
+			    </div>
+			    <div class="col-sm-6">
+			    	<div class="form-group">
+			      		<label>No. Telephone</label>
+			      		<input type="number" class="form-control" name="kapasitas" placeholder="Masukan nomor telephone">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Group</label>
+			      		<select class="form-control" name="status">
+			      			<option value="">Pilih Group</option>
+			      		</select>
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Password</label>
+			      		<input type="password" class="form-control" name="password" placeholder="Masukan password">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Status</label>
+			      		<select class="form-control" name="status">
+			      			<option value="">Pilih Status</option>
+			      			<option>Aktif</option>
+			      			<option>Tidak Aktif</option>
+			      		</select>
+			      	</div>
+			    </div>
+			</div>
+			<input type="hidden" name="edit" value="1">
+		</form>
+		<div class="form-group">
+			<button type="button" class="btn btn-primary simpan-edit-user" style="float:right;">Simpan</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+		</div>
+		<div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends 'base1.html' %}
+{% load humanize %}
+{% block title %}{{stok.nama}}{% endblock %}
+{% block content %}
+
+<div class="container body-content">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="produk-img">
+				<div class="produk-imgcase">
+					<img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{stok.gambar}}">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group produk-detail">
+				<div class="mb-3">
+					<div class="produk-nama">{{stok.nama}}</div>
+				</div>
+				<div class="mb-3">
+					<label class="from-label">Harga</label>
+					<div class="produk-harga">Rp. {{stok.harga|intcomma }}</div>
+				</div>
+				<div class="mb-3">
+					<label>Kategori</label>
+					<div>{{stok.kategori}}</div>
+				</div>
+				<div class="mb-3">
+					<label>Deskripsi</label>
+					<div class="produk-deskripsi">{{stok.deskripsi}}</div>
+				</div>
+				<div class="mb-3"><i>Masih tersedia sekitar {{stok.jumlah_stok}} stok</i></div>
+			</div>
+			<div class="produk-btn">
+				<button type="button" class="btn btn-produk btn-keranjang tambah-keranjang" data-id="{{stok.id}}">Tambah Keranjang</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

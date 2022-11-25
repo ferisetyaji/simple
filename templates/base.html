@@ -1,0 +1,377 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" style="min-height:100%;background-color:#f4f4f4">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Administrator - {% block title %}{% endblock title %}</title>
+        <link rel="stylesheet" href="{% static '/css/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static '/css/fontawesome/css/all.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+        <link rel="stylesheet" href="{% static '/css/main.css' %}">
+        <link rel="stylesheet" href="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/css/admin.css">
+    </head>
+    <body style="background-color:#f4f4f4">
+        <div class="top-bar">
+            <div class="btn-burger burger dib pointer"><i class="fas fa-bars"></i></div>
+            <a href="#" class="brands">SIMPEL - Pengunjung </a>
+            <p class="navbar-text navbar-right" style="margin-right:15px; margin-bottom:0;">Masuk sebagai <i style="color:#fff">Admin</i></p>
+            <div class="clear"></div>
+        </div>
+        <div class="admin-menu">
+            <ul class="list-unstyled">
+                <li id="dashboard">
+                    <a href="{% url 'dashboard' %}" class="admin-menu-first" data-id="#dashboard">
+                        <i class="fa fa-tachometer-alt fa-fw"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li id="pengunjung">
+                    <a href="{% url 'pengunjung' %}" class="admin-menu-first" data-id="#pengunjung">
+                        <i class="fa fa-user fa-fw"></i>
+                        <span>Data Pengunjung</span>
+                    </a>
+                </li>
+                <li id="kunjungan">
+                    <a href="{% url 'kunjungan' %}" class="admin-menu-first" data-id="#kunjungan">
+                        <i class="fa fa-users fa-fw"></i>
+                        <span>Data Kunjungan</span>
+                    </a>
+                </li>
+                <li id="setting">
+                    <a class="admin-menu-first" data-id="#setting">
+                        <i class="fa fa-cog fa-fw"></i>
+                        <span>Setting</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{% url 'ruang' %}">Referensi Ruang</a></li>
+                        <li><a href="{% url 'alat' %}">Referensi Alat</a></li>
+                        <li><a href="{% url 'group' %}">Group</a></li>
+                        <li><a href="{% url 'user' %}">User</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="data" data-id="#{% block menu %}{% endblock menu %}"></div>
+        <div class="contents">{% block content %}{% endblock content %}</div>
+        <div class="modal fade" id="modal-warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div>
+                        <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/error.png" class="img-modal-warning">
+                    <div class="content-modal-warning"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modal-success" tabindex="-1" role="dialog" data-backdrop="" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!-- <div>
+                        <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div> -->
+                    <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/check_circle.png" class="img-modal-warning">
+                    <div class="content-modal-success"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="{% static '/js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/bootstrap/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/dataTables.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/main.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                var add = '{% block tablebtn %}{% endblock %}';
+                $('#myTable_wrapper').prepend(add);
+
+                $('.simpan-tambah-pengunjung').click(function(){
+                    var no_ktp = $('.no-ktp').val();
+                    var jabatan = $('.jabatan').val();
+                    var kode_rfid = $('.kode-rfid').val();
+                    var nama = $('.nama').val();
+                    var instansi = $('.instansi').val();
+                    var keterangan = $('.keterangan').val();
+
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/pengunjung/tambah',
+                        type: 'post',
+                        data:{
+                            no_ktp:no_ktp,
+                            jabatan:jabatan,
+                            kode_rfid:kode_rfid,
+                            nama:nama,
+                            instansi:instansi,
+                            keterangan:keterangan
+                        },
+                        success: function(data){
+                            if(data.respon == 'success'){
+                                $('#modal-tambah-pengunjung').modal('hide');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('#modal-warning').modal('hide');
+                                $('#modal-success').modal('show');
+                            }
+                        }
+                    });
+                });
+
+                $('.edit-pengunjung').click(function(){
+                    var id = $(this).attr('data-id');
+                    $('.simpan-edit-pengunjung').attr('data-id', id);
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/pengunjung/data_pengunjung',
+                        type: 'post',
+                        data:{id:id},
+                        success: function(data){
+                            $('.edit-no-ktp').val(data.nik);
+                            $('.edit-jabatan').val(data.jabatan_pengunjung);
+                            $('.edit-kode-rfid').val(data.rfid);
+                            $('.edit-nama').val(data.nama_pengunjung);
+                            $('.edit-instansi').val(data.instansi_pengunjung);
+                            $('.edit-keterangan').val(data.keterangan_pengunjung);
+                            $('#modal-edit-pengunjung').modal('show');
+                        }
+                    });
+                });
+
+                $('.simpan-edit-pengunjung').click(function(){
+                    var id = $(this).attr('data-id');
+                    var no_ktp = $('.edit-no-ktp').val();
+                    var jabatan = $('.edit-jabatan').val();
+                    var kode_rfid = $('.edit-kode-rfid').val();
+                    var nama = $('.edit-nama').val();
+                    var instansi = $('.edit-instansi').val();
+                    var keterangan = $('.edit-keterangan').val();
+
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/pengunjung/edit',
+                        type: 'post',
+                        data:{
+                            id:id,
+                            no_ktp:no_ktp,
+                            jabatan:jabatan,
+                            kode_rfid:kode_rfid,
+                            nama:nama,
+                            instansi:instansi,
+                            keterangan:keterangan
+                        },
+                        success: function(data){
+                            if(data.respon == 'success'){
+                                $('#modal-edit-pengunjung').modal('hide');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('#modal-warning').modal('hide');
+                                $('#modal-success').modal('show');
+                            }
+                        }
+                    });
+                });
+
+
+                $('.hapus-pengunjung').click(function(){
+                    var id = $(this).attr('data-id');
+                    $('.content-modal-warning').html('<div id="text-modal-warning">Apakah anda yakin akan menghapus data ini?</div><div class="form-group btn-group-modal-warning"><button type="button" class="btn btn-primary btn-modal-warning ok-hapus-pengunjung" data-id="'+id+'" style="float:right">Ya</button><button type="button" class="btn btn-danger btn-modal-warning" data-dismiss="modal" style="float:left">Batal</button><div class="clearfix"></div>');
+                    $('#modal-warning').modal('show');
+                });
+
+                $(document).on('click', '.ok-hapus-pengunjung', function(){
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/pengunjung/delete',
+                        type: 'post',
+                        data:{id:id},
+                        success: function(data){
+                            console.log(data);
+                            if(data.respon == 'success'){
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Hapus!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('#modal-warning').modal('hide');
+                                $('#modal-success').modal('show');
+                            }
+                        }
+                    });
+                });
+
+                $('.detail-kunjungan').click(function(){
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/kunjungan/detail',
+                        type: 'post',
+                        data:{id:id},
+                        success: function(data){
+                            $('.no-ktp').val(data.pengunjung.nik);
+                            $('.jabatan').val(data.pengunjung.jabatan_pengunjung);
+                            $('.ruang').val(data.kunjungan.ruang);
+                            $('.nama').val(data.pengunjung.nama_pengunjung);
+                            $('.instansi').val(data.pengunjung.instansi_pengunjung);
+                            $('.waktu').val(data.kunjungan.waktu_kunjungan);
+                            $('.keterangan').val(data.kunjungan.keterangan_kunjungan);
+
+                            $('#modal-detail-kunjungan').modal('show');
+                        }
+                    });
+                });
+
+                $('.hapus-kunjungan').click(function(){
+                    var id = $(this).attr('data-id');
+                    $('.content-modal-warning').html('<div id="text-modal-warning">Apakah anda yakin akan menghapus data ini?</div><div class="form-group btn-group-modal-warning"><button type="button" class="btn btn-primary btn-modal-warning ok-hapus-kunjungan" data-id="'+id+'" style="float:right">Ya</button><button type="button" class="btn btn-danger btn-modal-warning" data-dismiss="modal" style="float:left">Batal</button><div class="clearfix"></div>');
+                    $('#modal-warning').modal('show');
+                });
+
+                $(document).on('click', '.ok-hapus-kunjungan', function(){
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/kunjungan/delete',
+                        type: 'post',
+                        data:{id:id},
+                        success: function(data){
+                            if(data.respon == 'success'){
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Hapus!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" data-dismiss="modal" onclick="window.location.reload()">OK</button></div>');
+                                $('#modal-warning').modal('hide');
+                                $('#modal-success').modal('show');
+                            }
+                        }
+                    });
+                });
+
+                $('.edit-ruang').click(function(){
+                    var id = $(this).attr('data-id');
+                    $('.simpan-edit-ruang').val(id);
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/ruang/detail',
+                        type: 'post',
+                        data:{id:id},
+                        success: function(data){
+                            $('.nama_ruang').val(data.nama_ruang);
+                            $('.kapasitas').val(data.kapasitas);
+                            if(data.isaktif == 'Aktif'){
+                                $('.aktif').attr('selected', '');
+                            }else{
+                                $('.tidak-aktif').attr('selected', '');
+                            }
+
+                            $('#modal-edit-ruang').modal('show');
+                        }
+                    });
+                });
+
+                $('.hapus-ruang').click(function(){
+                    var id = $(this).attr('data-id');
+                    $('.content-modal-warning').html('<div id="text-modal-warning">Apakah anda yakin akan menghapus data ini?</div><div class="form-group btn-group-modal-warning"><button type="button" class="btn btn-primary btn-modal-warning ok-hapus-ruang" data-id="'+id+'" style="float:right">Ya</button><button type="button" class="btn btn-danger btn-modal-warning" data-dismiss="modal" style="float:left">Batal</button><div class="clearfix"></div>');
+                    $('#modal-warning').modal('show');
+                });
+
+                $(document).on('click', '.ok-hapus-ruang', function(){
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/ruang/delete',
+                        type: 'post',
+                        data:{id:id},
+                        success: function(data){
+                            if(data.respon == 'success'){
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Hapus!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('#modal-warning').modal('hide');
+                                $('#modal-success').modal('show');
+                            }
+                        }
+                    });
+                });
+
+                $('.simpan-tambah-alat').click(function(){
+                    var nama_alat = $('.nama_alat').val();
+                    var status = $('.status').val();
+
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/alat/tambah',
+                        type: 'post',
+                        data:{
+                            nama_alat:nama_alat,
+                            status.:status,
+                        },
+                        success: function(data){
+                            if(data.respon == 'success'){
+                                $('#modal-tambah-alat').modal('hide');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('#modal-success').modal('show');
+                            }
+                        }
+                    });
+                });
+
+                $('.edit-alat').click(function(){
+                    $('#modal-edit-alat').modal('show');
+                });
+
+                $('.simpan-edit-alat').click(function(){
+                    var nama_alat = $('.nama_alat').val();
+                    var status = $('.status').val();
+
+                    $.ajax({
+                        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/alat/tambah',
+                        type: 'post',
+                        data:{
+                            nama_alat:nama_alat,
+                            status.:status,
+                        },
+                        success: function(data){
+                            if(data.respon == 'success'){
+                                $('#modal-tambah-alat').modal('hide');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('#modal-success').modal('show');
+                            }
+                        }
+                    });
+                });
+
+                $('.hapus-alat').click(function(){
+                    $('.content-modal-warning').html('<div id="text-modal-warning">Apakah anda yakin akan menghapus data ini?</div><div class="form-group btn-group-modal-warning"><button type="button" class="btn btn-primary btn-modal-warning ok-hapus-alat" style="float:right">Ya</button><button type="button" class="btn btn-danger btn-modal-warning" data-dismiss="modal" style="float:left">Batal</button><div class="clearfix"></div>');
+                    $('#modal-warning').modal('show');
+                });
+
+                $(document).on('click', '.ok-hapus-alat', function(){
+                    $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Hapus!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" data-dismiss="modal">OK</button></div>');
+                    $('#modal-warning').modal('hide');
+                    $('#modal-success').modal('show');
+                });
+
+                $('.edit-group').click(function(){
+                    $('#modal-edit-group').modal('show');
+                });
+
+                $('.hapus-group').click(function(){
+                    $('.content-modal-warning').html('<div id="text-modal-warning">Apakah anda yakin akan menghapus data ini?</div><div class="form-group btn-group-modal-warning"><button type="button" class="btn btn-primary btn-modal-warning ok-hapus-group" style="float:right">Ya</button><button type="button" class="btn btn-danger btn-modal-warning" data-dismiss="modal" style="float:left">Batal</button><div class="clearfix"></div>');
+                    $('#modal-warning').modal('show');
+                });
+
+                $(document).on('click', '.ok-hapus-group', function(){
+                    $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Hapus!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" data-dismiss="modal">OK</button></div>');
+                    $('#modal-warning').modal('hide');
+                    $('#modal-success').modal('show');
+                });
+
+                $('.edit-user').click(function(){
+                    $('#modal-edit-user').modal('show');
+                });
+
+                $('.hapus-user').click(function(){
+                    $('.content-modal-warning').html('<div id="text-modal-warning">Apakah anda yakin akan menghapus data ini?</div><div class="form-group btn-group-modal-warning"><button type="button" class="btn btn-primary btn-modal-warning ok-hapus-user" style="float:right">Ya</button><button type="button" class="btn btn-danger btn-modal-warning" data-dismiss="modal" style="float:left">Batal</button><div class="clearfix"></div>');
+                    $('#modal-warning').modal('show');
+                });
+
+                $(document).on('click', '.ok-hapus-user', function(){
+                    $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Hapus!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" data-dismiss="modal">OK</button></div>');
+                    $('#modal-warning').modal('hide');
+                    $('#modal-success').modal('show');
+                });
+
+                {% block jscp %}{% endblock jscp %}
+            });
+        </script>
+    </body>
+</html>

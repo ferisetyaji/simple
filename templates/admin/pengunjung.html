@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block title %}Data Pengunjung{% endblock %}
+{% block menu %}pengunjung{% endblock %}
+{% block content %}
+<br>
+<ul class="path">
+	<li>App</li>
+	<li>></li>
+	<li>Data Pengunjung</li>
+</ul>
+<h3>Data Pengunjung</h3>
+<div class="clearfix"></div>
+<button type="button" class="btn btn-primary btn-sm tambah-pengunjung" data-toggle="modal" data-target="#modal-tambah-pengunjung">Tambah</button>
+<div class="table-content">
+	<br>
+	<form method="post">
+		<table class="table table-bordered" id="myTable">
+			<thead>
+				<tr>
+					<th class="tb-no">No</th>
+					<th>No. KTP</th>
+					<th>Nama Pengunjung</th>
+					<th>Jabatan</th>
+					<th>Instansi</th>
+					<th>RFID</th>
+					<th>Keterangan Kunjungan</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in pengunjung %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ item.no_ktp }}</td>
+					<td>{{ item.nama_pengunjung }}</td>
+					<td>{{ item.jabatan }}</td>
+					<td>{{ item.instansi }}</td>
+					<td>{{ item.kode_rfid }}</td>
+					<td>{{ item.keterangan }}</td>
+					<td>
+						<button type="button" class="btn btn-primary btn-xs edit-pengunjung" data-id="{{ item.id }}">Edit</button>
+						<button type="button" class="btn btn-danger btn-xs hapus-pengunjung" data-id="{{ item.id }}">Hapus</button>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</form>
+	<div class="clear"></div>
+</div>
+<div class="modal fade" id="modal-tambah-pengunjung" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tambah Data Pengunjung</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-tambah-pengunjung">
+		    <div class="row">
+		    	<div class="col-sm-6">
+			      	<div class="form-group">
+			      		<label>No. KTP</label>
+			      		<input type="text" class="form-control no-ktp" name="no_ktp" placeholder="Masukan nomor KTP">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Jabatan</label>
+			      		<input type="text" class="form-control jabatan" name="jabatan" placeholder="Masukan nama jabatan">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Kode RFID</label>
+			      		<input type="text" class="form-control kode-rfid" name="kode_rfid" placeholder="Masukan kode RFID">
+			      	</div>
+			    </div>
+			    <div class="col-sm-6">
+			    	<div class="form-group">
+			      		<label>Nama Pengunjung</label>
+			      		<input type="text" class="form-control nama" name="nama" placeholder="Masukan nama pengunjung">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Instansi</label>
+			      		<input type="text" class="form-control instansi" name="instansi" placeholder="Masukan nama instansi">
+			      	</div>
+			    </div>
+			</div>
+			<div class="form-group">
+				<label>Keterangan</label>
+				<textarea class="form-control keterangan" name="keterangan" placeholder="Masukan keterangan"></textarea>
+			</div>
+			<input type="hidden" name="tambah" value="1">
+		</form>
+		<div class="form-group">
+			<button type="button" class="btn btn-primary simpan-tambah-pengunjung" style="float:right;">Simpan</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+		</div>
+		<div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-edit-pengunjung" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Data Pengunjung</h4>
+      </div>
+      <div class="modal-body">
+		<form method="post" id="form-edit-pengunjung">
+		    <div class="row">
+		    	<div class="col-sm-6">
+			      	<div class="form-group">
+			      		<label>No. KTP</label>
+			      		<input type="text" class="form-control edit-no-ktp" name="no_ktp" placeholder="Masukan nomor KTP">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Jabatan</label>
+			      		<input type="text" class="form-control edit-jabatan" name="jabatan" placeholder="Masukan nama jabatan">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Kode RFID</label>
+			      		<input type="text" class="form-control edit-kode-rfid" name="kode_rfid" placeholder="Masukan kode RFID">
+			      	</div>
+			    </div>
+			    <div class="col-sm-6">
+			    	<div class="form-group">
+			      		<label>Nama Pengunjung</label>
+			      		<input type="text" class="form-control edit-nama" name="nama" placeholder="Masukan nama pengunjung">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Instansi</label>
+			      		<input type="text" class="form-control edit-instansi" name="instansi" placeholder="Masukan nama instansi">
+			      	</div>
+			    </div>
+			</div>
+			<div class="form-group">
+				<label>Keterangan</label>
+				<textarea class="form-control edit-keterangan" name="keterangan" placeholder="Masukan keterangan"></textarea>
+			</div>
+			<input type="hidden" name="edit" value="1">
+		</form>
+		<div class="form-group">
+			<button type="button" class="btn btn-primary simpan-edit-pengunjung" style="float:right;">Simpan</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+		</div>
+		<div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

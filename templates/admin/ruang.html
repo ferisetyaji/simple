@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block title %}Referensi Ruang{% endblock %}
+{% block menu %}setting{% endblock %}
+{% block content %}
+<br>
+<ul class="path">
+	<li>Setting</li>
+	<li>></li>
+	<li>Referensi Ruang</li>
+</ul>
+<h3>Referensi Ruang</h3>
+<div class="clearfix"></div>
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah-ruang">Tambah</button>
+<div class="table-content">
+	<br>
+	<form method="post">
+		<table class="table table-bordered" id="myTable">
+			<thead>
+				<tr>
+					<th class="tb-no">No</th>
+					<th>Nama Ruang</th>
+					<th>Kapasitas Ruang</th>
+					<th>Nama Alat</th>
+					<th>Foto Ruang</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in ruang %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ item.nama_ruang }}</td>
+					<td>{{ item.kapasitas }}</td>
+					<td>{{ item.nama_alat }}</td>
+					<td><img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{ item.foto }}" alt="foto-ruang"></td>
+					<td>{{ item.isaktif }}</td>
+					<td>
+						<button type="button" class="btn btn-primary btn-xs edit-ruang" data-id="{{ item.id }}">Edit</button>
+						<button type="button" class="btn btn-danger btn-xs hapus-ruang" data-id="{{ item.id }}">Hapus</button>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</form>
+	<div class="clear"></div>
+</div>
+<div class="modal fade" id="modal-tambah-ruang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tambah Data Ruang</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-tambah-ruang" enctype="multipart/form-data">
+		    <div class="row">
+		    	<div class="col-sm-6">
+			      	<div class="form-group">
+			      		<label>Nama Ruang</label>
+			      		<input type="text" class="form-control" name="nama_ruang" placeholder="Masukan nama ruang">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Nama Alat</label>
+			      		<select class="form-control" name="nama_alat">
+			      			<option value="">Pilih Alat</option>
+			      		</select>
+			      	</div>
+			      	<div class="form-group">
+			      		<label>File Upload</label>
+			      		<input type="file" class="form-control" name="upload">
+			      	</div>
+			    </div>
+			    <div class="col-sm-6">
+			    	<div class="form-group">
+			      		<label>Kapasitas Ruang</label>
+			      		<input type="number" class="form-control" name="kapasitas" placeholder="Masukan Kapasitas ruang">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Status</label>
+			      		<select class="form-control" name="status">
+			      			<option value="">Pilih Status</option>
+			      			<option>Aktif</option>
+			      			<option>Tidak Aktif</option>
+			      		</select>
+			      	</div>
+			    </div>
+			</div>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="tambah" value="1" style="float:right;">Simpan</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+		</div>
+		<div class="clearfix"></div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-edit-ruang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Data Ruang</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-edit-ruang" enctype="multipart/form-data">
+		    <div class="row">
+		    	<div class="col-sm-6">
+			      	<div class="form-group">
+			      		<label>Nama Ruang</label>
+			      		<input type="text" class="form-control nama_ruang" name="nama_ruang" value="ruang 1" placeholder="Masukan nama ruang">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Nama Alat</label>
+			      		<select class="form-control" name="nama_alat">
+			      			<option value="">Pilih Alat</option>
+			      		</select>
+			      	</div>
+			      	<div class="form-group">
+			      		<label>File Upload</label>
+			      		<input type="file" class="form-control" name="upload">
+			      	</div>
+			    </div>
+			    <div class="col-sm-6">
+			    	<div class="form-group">
+			      		<label>Kapasitas Ruang</label>
+			      		<input type="number" class="form-control kapasitas" name="kapasitas" placeholder="Masukan Kapasitas ruang">
+			      	</div>
+			      	<div class="form-group">
+			      		<label>Status</label>
+			      		<select class="form-control" name="status">
+			      			<option value="">Pilih Status</option>
+			      			<option class="aktif">Aktif</option>
+			      			<option class="tidak-aktif">Tidak Aktif</option>
+			      		</select>
+			      	</div>
+			    </div>
+			</div>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary simpan-edit-ruang" name="edit" style="float:right;">Simpan</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+		</div>
+		</form>
+		<div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+{% block jscp %}
+
+{% if msg == 'success' %}
+
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><a href="{% url 'ruang' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+   $('#modal-success').modal('show');
+
+{% endif %}
+
+{% endblock jscp %}

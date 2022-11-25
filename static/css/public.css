@@ -1,0 +1,154 @@
+*{
+    color:#555;
+}
+a, a:focus{
+    color:#555;
+    text-decoration:none !important; 
+}
+label{
+    font-weight:600;
+}
+img{
+    width:100%;
+}
+body{
+    margin-bottom: 60px;
+}
+.bd-left{
+    float:left;
+}
+.bd-right{
+    float:right;
+}
+.btn, .form-control, .modal{
+    border-radius: 4px;
+}
+.top-bar{
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    padding:15px 0;
+    background-color: #fff176;
+    border-bottom: 0.5px solid #ddd;
+    box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,0.1);
+}
+.brand{
+    float:left;
+    display:block;
+    font-size:1.1em;
+    font-weight:600;
+    color:#555 !important;
+    text-decoration:none !important;
+}
+.form-search{
+    border: 1px solid #ddd;
+    margin: -4px 8px;
+    outline: unset;
+    border-radius: 5px;
+    padding: 4px 11px;
+    font-size:0.9em;
+    color:#555;
+    box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,0.1);
+}
+.tool-menu{
+    float: right;
+    display: block;
+    margin: -5px 8px;
+    padding: 4px 8px;
+    font-size: 1.2em;
+    cursor:pointer;
+}
+
+.body-content{
+    padding-top:88px;
+}
+
+.stok-item{
+    margin-bottom:30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.1);
+}
+.stok-img{
+    overflow:hidden;
+}
+.stok-detail{
+    padding: 15px;
+}
+.stok-harga{
+    margin: 5px 0;
+    font-size: 0.9em;
+    color:orange;
+}
+
+footer{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding: 15px 0;
+    border-top:1px solid #ddd;
+}
+.text-footer{
+    text-align:center;
+    margin:0;
+}
+
+.produk-nama{
+    font-size: 2em;
+}
+.produk-harga{
+    color:orange;
+}
+.btn-produk{
+    color:#fff;
+    background-color:#f57c00;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.1);
+}
+
+.beli-harga{
+    color:orange;
+    margin-bottom:5px
+}
+.plus-qty, .nilai-qty, .min-qty{
+    float:left;
+}
+.plus-qty, .min-qty{
+    font-size:0.8em;
+    padding:4px 10px 2px;
+    border: 1px solid #ddd;
+    cursor:pointer;
+    border-radius: 5px;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.1);
+}
+.nilai-qty{
+    padding:3px 10px;
+}
+.close{
+    margin-top: 0;
+    opacity: unset;
+}
+.ac-alamat{
+    cursor:pointer;
+    padding:5px 0px;
+    margin-bottom:15px;
+    border-top:1px solid #ddd;
+}
+.icon-alamat{
+    float:right;
+}
+
+.form-register{
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top:100px;
+    padding-bottom:50px;
+}
+.logo-register{
+    font-size:4em;
+}
+.btn-register{
+    display:block;
+    width:200px;
+    margin:0 auto;
+}
