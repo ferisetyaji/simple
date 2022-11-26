@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" style="min-height:100%;background-color:#f4f4f4">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login - {% block title %}{% endblock title %}</title>
+        <link rel="stylesheet" href="{% static '/css/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static '/css/fontawesome/css/all.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+        <link rel="stylesheet" href="static/css/login.css">
+    </head>
+    <body>
+        <form method="post">
+            <div class="login" style="
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 350px;
+    background-color: #fff;
+    padding-top:100px;
+">
+                <div class="title-login" style="
+    margin: 0 auto;
+    display: block;
+    width: 222px;
+">
+                    <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/mobile-pay1.png" style="float:left;width:40px">
+                    <div class="text-login" style="font-size:1.25em;font-weight:bold;padding-top:10px;">SIMPLE - Pengunjung</div>
+                    <div class="clearfix"></div>
+                </div>
+                <br>
+                <div style="text-align:center;font-size:1.15em;font-weight: 600;">Selamat Datang!</div>
+                <div style="text-align:center;font-size:0.9em;">Login untuk masuk ke aplikasi</div>
+                <br>
+                <div style="padding:30px">
+                    <input type="text" class="form-control" name="username" placeholder="Username" style="border-radius:5px;padding-top:20px;padding-bottom:20px;">
+                    <br>
+                    <input type="password" class="form-control" name="password" placeholder="Password" style="border-radius:5px;padding-top:20px;padding-bottom:20px;">
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block" name="login" value="1" style="border-radius:5px;">Login</button>
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript" src="{% static '/js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/bootstrap/bootstrap.min.js' %}"></script>
+    </body>
+</html>

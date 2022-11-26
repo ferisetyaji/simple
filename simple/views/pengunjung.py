@@ -58,7 +58,8 @@ def edit(request):
 				jabatan_pengunjung = request.POST['jabatan'],
 				nik = request.POST['no_ktp'],
 				rfid = request.POST['kode_rfid'],
-				keterangan_pengunjung = request.POST['keterangan']
+				keterangan_pengunjung = request.POST['keterangan'],
+				sysupdate = datetime.datetime.now()
 			)
 		data = '{"respon":"success"}'
 

@@ -24,15 +24,17 @@
 				</tr>
 			</thead>
 			<tbody>
+			{% for item in group %}
 				<tr>
-					<td>1</td>
-					<td>Admin</td>
-					<td>Aktif</td>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ item.nama_group }}</td>
+					<td>{{ item.isaktif }}</td>
 					<td>
-						<button type="button" class="btn btn-primary btn-xs edit-group">Edit</button>
-						<button type="button" class="btn btn-danger btn-xs hapus-group">Hapus</button>
+						<button type="button" class="btn btn-primary btn-xs edit-group" data-id="{{ item.id }}">Edit</button>
+						<button type="button" class="btn btn-danger btn-xs hapus-group" data-id="{{ item.id }}">Hapus</button>
 					</td>
 				</tr>
+			{% endfor %}
 			</tbody>
 		</table>
 	</form>
@@ -51,13 +53,13 @@
 				<div class="col-sm-6">
 			      	<div class="form-group">
 			      		<label>Nama Group</label>
-			      		<input type="text" class="form-control" name="nama_group">
+			      		<input type="text" class="form-control nama_group" name="nama_group">
 			      	</div>
 			    </div>
 			    <div class="col-sm-6">
 			      	<div class="form-group">
 			      		<label>Status</label>
-			      		<select class="form-control" name="status">
+			      		<select class="form-control status" name="status">
 			      			<option value="">Pilih Status</option>
 			      			<option>Aktif</option>
 			      			<option>Tidak Aktif</option>
@@ -65,7 +67,6 @@
 			      	</div>
 			    </div>
 			</div>
-			<input type="hidden" name="tambah" value="1">
 		</form>
 		<div class="form-group">
 			<button type="button" class="btn btn-primary simpan-tambah-group" style="float:right;">Simpan</button>
@@ -89,21 +90,20 @@
 				<div class="col-sm-6">
 			      	<div class="form-group">
 			      		<label>Nama Group</label>
-			      		<input type="text" class="form-control" name="nama_group">
+			      		<input type="text" class="form-control edit_nama_group" name="nama_group">
 			      	</div>
 			    </div>
 			    <div class="col-sm-6">
 			      	<div class="form-group">
 			      		<label>Status</label>
-			      		<select class="form-control" name="status">
+			      		<select class="form-control edit_status" name="status">
 			      			<option value="">Pilih Status</option>
-			      			<option>Aktif</option>
-			      			<option>Tidak Aktif</option>
+			      			<option class="aktif">Aktif</option>
+			      			<option class="tidak-aktif">Tidak Aktif</option>
 			      		</select>
 			      	</div>
 			    </div>
 			</div>
-			<input type="hidden" name="tambah" value="1">
 		</form>
 		<div class="form-group">
 			<button type="button" class="btn btn-primary simpan-edit-group" style="float:right;">Simpan</button>

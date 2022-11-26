@@ -19,10 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 
-from .views import dashboard, pengunjung, kunjungan, ruang, user, group, alat
+from .views import dashboard, pengunjung, kunjungan, ruang, user, group, alat, login
 
 urlpatterns = [
     path('', dashboard.index, name='dashboard'),
+    path('login', login.index, name='login'),
     path('pengunjung', pengunjung.index, name='pengunjung'),
     path('pengunjung/tambah', pengunjung.tambah, name='pengunjung_tambah'),
     path('pengunjung/data_pengunjung', pengunjung.data_pengunjung, name='data_pengunjung'),
@@ -36,8 +37,16 @@ urlpatterns = [
     path('ruang/delete', ruang.delete, name='ruang_delete'),
     path('user', user.index, name='user'),
     path('group', group.index, name='group'),
+    path('group/tambah', group.tambah, name='group_tambah'),
+    path('group/detail', group.detail, name='group_detail'),
+    path('group/edit', group.edit, name='group_edit'),
+    path('group/delete', group.delete, name='group_delete'),
     path('user', user.index, name='user'),
+    path('user/detail_login', user.detail_login, name='detail_login'),
+    path('user/detail', user.detail, name='user_detail'),
+    path('user/delete', user.delete, name='user_delete'),
     path('alat', alat.index, name='alat'),
+    path('alat/tambah', alat.tambah, name='alat_tambah'),
     path('alat/edit', alat.edit, name='alat_edit'),
     path('alat/detail', alat.detail, name='alat_detail'),
     path('alat/delete', alat.delete, name='alat_delete'),

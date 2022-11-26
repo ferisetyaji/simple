@@ -15,7 +15,7 @@ def tambah(request):
 	data = None
 	if request.method == 'POST':
 		q = Alat.objects.create(
-				nama_alat = request.POST['nama'],
+				nama_alat = request.POST['nama_alat'],
 				isaktif = request.POST['status']
 			)
 		q.save
@@ -33,7 +33,7 @@ def edit(request):
 	data = None
 	if request.method == 'POST':
 		Alat.objects.filter(id = request.POST['id']).update(
-				nama_alat = request.POST['nama'],
+				nama_alat = request.POST['nama_alat'],
 				isaktif = request.POST['status']
 			)
 		data = '{"respon":"success"}'
