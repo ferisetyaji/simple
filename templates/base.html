@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" style="min-height:100%;background-color:#f4f4f4">
+<html lang="en" style="min-height:100%;background-color:#f5f5f5">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,8 +14,9 @@
     </head>
     <body style="background-color:#f4f4f4">
         <div class="top-bar">
-            <div class="btn-burger burger dib pointer"><i class="fas fa-bars"></i></div>
+            <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/mobile-pay1.png" class="img-bar">
             <a href="#" class="brands">SIMPEL - Pengunjung </a>
+            <div class="btn-burger burger dib pointer"><i class="fas fa-bars"></i></div>
             <p class="navbar-text navbar-right" style="margin-right:15px; margin-bottom:0;">Masuk sebagai <i style="color:#fff">Admin</i></p>
             <div class="clear"></div>
         </div>
@@ -43,6 +44,8 @@
                     <a class="admin-menu-first" data-id="#setting">
                         <i class="fa fa-cog fa-fw"></i>
                         <span>Setting</span>
+                        <span class="submenu-i"><i class="fa fa-chevron-right fa-fw"></i></span>
+                        <div class="clearfix"></div>
                     </a>
                     <ul class="submenu">
                         <li><a href="{% url 'ruang' %}">Referensi Ruang</a></li>
@@ -89,7 +92,7 @@
         <script type="text/javascript" src="{% static '/js/main.js' %}"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                $.get('{{request.scheme}}://{{request.META.HTTP_HOST}}/user/detail_login/', function(data){
+                $.get('{{request.scheme}}://{{request.META.HTTP_HOST}}/user/detail_login', function(data){
                     if(data.msg == 'faild'){
                         window.location.href = "{% url 'login' %}";
                     }
@@ -120,7 +123,7 @@
                         success: function(data){
                             if(data.respon == 'success'){
                                 $('#modal-tambah-pengunjung').modal('hide');
-                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil ditambah.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
                                 $('#modal-warning').modal('hide');
                                 $('#modal-success').modal('show');
                             }
@@ -171,7 +174,7 @@
                         success: function(data){
                             if(data.respon == 'success'){
                                 $('#modal-edit-pengunjung').modal('hide');
-                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil diedit.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
                                 $('#modal-warning').modal('hide');
                                 $('#modal-success').modal('show');
                             }
@@ -303,7 +306,7 @@
                         success: function(data){
                             if(data.respon == 'success'){
                                 $('#modal-tambah-alat').modal('hide');
-                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil ditambah.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
                                 $('#modal-success').modal('show');
                             }
                         }
@@ -346,7 +349,7 @@
                         success: function(data){
                             if(data.respon == 'success'){
                                 $('#modal-tambah-alat').modal('hide');
-                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil diedit.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
                                 $('#modal-success').modal('show');
                             }
                         }
@@ -392,7 +395,7 @@
                         success: function(data){
                             if(data.respon == 'success'){
                                 $('#modal-tambah-group').modal('hide');
-                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil ditambah.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
                                 $('#modal-success').modal('show');
                             }
                         }
@@ -435,7 +438,7 @@
                         success: function(data){
                             if(data.respon == 'success'){
                                 $('#modal-tambah-group').modal('hide');
-                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
+                                $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil diedit.</div><div class="form-group btn-group-modal-success"><button type="button" class="btn btn-success btn-modal-warning btn-modal-success" onclick="window.location.reload()">OK</button></div>');
                                 $('#modal-success').modal('show');
                             }
                         }

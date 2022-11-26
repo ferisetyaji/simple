@@ -1,0 +1,36 @@
+.login{
+	position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 350px;
+    background-color: #fff;
+    padding-top:100px;
+}
+.title-login{
+	margin: 0 auto;
+    display: block;
+    width: 222px;
+}
+.text-login{
+	font-size:1.25em;
+	font-weight:bold;
+	padding-top:10px;
+}
+.welcome-title{
+	text-align:center;
+	font-size:1.15em;
+	font-weight: 600;
+}
+.text-welcome{
+	text-align:center;
+	font-size:0.9em;
+}
+.img-login{
+	float:left;
+	width:40px;
+}
+.form-login{
+	border-radius:5px;
+	padding-top:20px;
+	padding-bottom:20px;
+}

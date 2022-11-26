@@ -12,9 +12,8 @@
     position: fixed;
     width: 100%;
     z-index: 10;
-    padding: 10px 15px 16px;
-    background-color: #fff176;
-    border-bottom: 0.5px solid #ddd;
+    padding: 12px 15px 18px;
+    background-color: #196CE9;;
     box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,0.1);
 }
 .btn-burger{
@@ -23,7 +22,7 @@
     padding-bottom: 5px;
     font-size: 1.5em;
     line-height:0;
-    color:#555;
+    color:#fff;
 }
 .btn-burger:hover{
     color:#ffffffcc;
@@ -31,10 +30,14 @@
 .brands{
     float: left;
     padding-top: 9px;
-    font-size: 1.5em;
-    font-weight: 600;
-    color: #555 !important;
+    font-size: 1.4em;
+    color: #fff !important;
     text-decoration:none !important;
+}
+.img-bar{
+    float: left;
+    width: 41px;
+    margin-right: 4px;
 }
 .navbar-brand, .navbar-brand:hover{color:#fff;}
 .text-user{
@@ -96,11 +99,13 @@
     width: 225px;
     padding: 0 15px;
     padding-top: 80px;
-    background-color:#555;
+    background-color:#fff;
     z-index: 9;
     overflow-y: auto;
     overflow-x: hidden;
     transition: 0.3s;
+    box-shadow: 0.25rem 0 0.25rem 1px rgb(0 0 0 / 10%);
+
 }
 .admin-menu ul li{margin:7px 0;}
 .admin-menu ul li a, .submenu li a{
@@ -111,12 +116,12 @@
     padding-left:5px;
     text-decoration: none;
     cursor:pointer;
-    color:#fff;
+    color:#4C93F0;
 }
 .admin-menu-first:hover, .admin-menu-active{
     border-radius:4px;
     background-color:#ffffff85;;
-    color:#fff !important;
+    color:#4C93F0 !important;
 }
 .admin-logout i, .admin-menu-first i, .admin-menu-active i{
     font-size:1.1em;
@@ -144,7 +149,12 @@
     margin:15px 0;
     background-color:#fff;
 }
-.submenu li a:hover{color:#e74a3b !important;}
+.submenu li a:hover{color:#4C93F0 !important;}
+.submenu-i{
+    float: right;
+    font-size: 0.8em;
+    padding-top: 3px;
+}
 .side-hr{
     clear:both;
     height:1px;

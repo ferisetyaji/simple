@@ -35,10 +35,12 @@ $(document).ready(function(){
 		$('.submenu').css({'max-height':'0px'});
 		$(this).removeClass('admin-menu-first').addClass('admin-menu-active');
 		panel.style.maxHeight = panel.scrollHeight + "px";
+		$(this).children('.submenu-i').html('<i class="fa fa-chevron-down fa-fw"></i>');
 	});
 	$(document).on('click', '.admin-menu-active', function(){
 		$('.submenu').css({'max-height':'0px'});
 		$('.admin-menu-active').removeClass('admin-menu-active').addClass('admin-menu-first');
+		$(this).children('.submenu-i').html('<i class="fa fa-chevron-right fa-fw"></i>');
 	});
 
 	var checkid = document.getElementsByClassName('check');

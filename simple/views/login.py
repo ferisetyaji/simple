@@ -12,7 +12,7 @@ def index(request):
 
 			return redirect('dashboard')
 		else:
-			msg = 'alert("Username atau password salah'
+			msg = 'alert("Username atau password salah)'
 
 	
 	return render(request, 'admin/login.html')

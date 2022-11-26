@@ -84,3 +84,12 @@ def delete(request):
 		data = '{"respon":"success"}'
 
 	return HttpResponse(data, content_type="text/json-comment-filtered")
+
+def detail_login(request):
+	if 'id' in request.session:
+		cs = Pengguna.objects.filter(id = request.session['id']).values()[0]
+		data = json.dumps(cs, indent=4, sort_keys=True, default=str)
+	else:
+		data = '{"msg":"faild"}';
+
+	return HttpResponse(data, content_type="text/json-comment-filtered")
