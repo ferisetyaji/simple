@@ -17,12 +17,14 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click' , '.drop-bar', function(){
-		$('.navbar-img').append('<div class="drop-hide"></div>');
+		$('.navbar-img').prepend('<div class="drop-hide"></div>');
 		$('.dropmenu').addClass('dropmenu-ac');
+		$('.dropdown-i').html('<i class="fa fa-chevron-down fa-fw"></i>');
 	});
 	$(document).on('click', '.drop-hide', function(){
 		$(this).remove();
 		$('.dropmenu').removeClass('dropmenu-ac');
+		$('.dropdown-i').html('<i class="fa fa-chevron-right fa-fw"></i>');
 	});
 
 	var adminmenu = $('#data').attr('data-id');
