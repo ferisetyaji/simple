@@ -30,3 +30,27 @@
 </div>
 
 {% endblock content %}
+{% block jscp %}
+
+var xValues1 = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Ags", "Sep", "Okt", "Nov", "Des"];
+var yValues1 = [55, 49, 44, 24, 15];
+var barColors1 = ["green", "green","green","green","green","green","green","green","green", "green", "green", "green"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues1,
+    datasets: [{
+      backgroundColor: barColors1,
+      data: yValues1
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: false,
+      text: ""
+    }
+  }
+});
+{% endblock jscp %}
