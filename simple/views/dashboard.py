@@ -2,7 +2,7 @@ import datetime
 
 from django.shortcuts import render, redirect
 
-from application.models import Pengunjung
+from application.models import Pengunjung, Ruang, Kunjungan
 
 def index(request):
 	
@@ -19,9 +19,18 @@ def index(request):
 	nov = 0
 	des = 0
 
-	data = Pengunjung.objects.all();
-	for item in data:
-		tgl = item.sysinsert
+	_kunjungan = []
+
+	data_pengunjung = Pengunjung.objects.all();
+	for dp_item in data_pengunjung:
+
+		jml_kp = Kunjungan.objects.filter(id_pengunjung=dp_item['id']).count()
+		_kunjungan.append({
+				'nama':dp_item['nama_pengunjung'],
+				'jml':jml_kp
+			})
+
+		tgl = dp_item.sysinsert
 		bulan = tgl.month
 		jan += 1 if tgl == 1 else 0
 		feb += 1 if tgl == 2 else 0
@@ -37,4 +46,31 @@ def index(request):
 		des += 1 if tgl == 12 else 0
 
 
-	return render(request, 'admin/dashboard.html')
+	data_ruang = Ruang.objects.all()
+	_ruang = []
+	for dr_item in data_ruang:
+		jml_kunjungan_ruang = Kunjungan.filter(id_ruang = dr_item['id']).count()
+		sp = ',' if _ruang != [] else ''
+		_ruang.append({
+				'nama':dr_item['nama_ruang'],
+				'jml':jml_kunjungan_ruang,
+				'sp':sp
+			});
+
+
+	return render(request, 'admin/dashboard.html', {
+			'jan':jan,
+			'feb':feb,
+			'mar':mar,
+			'apr':apr,
+			'mei':mei,
+			'jun':jun,
+			'jul':jul,
+			'ags':ags,
+			'sep':sep,
+			'okt':okt,
+			'nov':nov,
+			'des':des,
+			'ruang':_ruang,
+			'kunjungan':_kunjungan
+		})
