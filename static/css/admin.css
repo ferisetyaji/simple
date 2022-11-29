@@ -352,3 +352,24 @@
 .btn-modal-success{
     background-color: #5442CD !important;
 }
+.btn-pen, .btn-trash, .btn-i{
+    border-radius: 50px;
+    padding: 3px 4.5px;
+    outline: unset !important;
+    outline-offset: unset !important;
+}
+.btn-pen{
+    background-color:#196ce947 !important;
+    color: #196CE9 !important;
+    margin:0 5px;
+}
+.btn-trash{
+    background-color: #eb575740 !important;
+    color: #EB5757 !important;
+    margin:0 5px;
+}
+.btn-i{
+    background-color:#21965340 !important;
+    color: #219653 !important;
+    margin:0 5px;
+}

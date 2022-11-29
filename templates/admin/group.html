@@ -30,8 +30,10 @@
 					<td>{{ item.nama_group }}</td>
 					<td>{{ item.isaktif }}</td>
 					<td>
-						<button type="button" class="btn btn-primary btn-xs edit-group" data-id="{{ item.id }}">Edit</button>
-						<button type="button" class="btn btn-danger btn-xs hapus-group" data-id="{{ item.id }}">Hapus</button>
+						<div style="width:82px;margin:0 auto">
+							<button type="button" class="btn btn-pen btn-xs edit-group" data-id="{{ item.id }}"><i class="fa fa-pencil-alt fa-fw"></i></button>
+							<button type="button" class="btn btn-trash btn-xs hapus-group" data-id="{{ item.id }}"><i class="fa fa-trash fa-fw"></i></button>
+						</div>
 					</td>
 				</tr>
 			{% endfor %}
