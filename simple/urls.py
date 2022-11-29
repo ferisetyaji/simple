@@ -19,12 +19,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 
-from .views import dashboard, pengunjung, kunjungan, ruang, user, group, alat, login
+from .views import dashboard, pengunjung, kunjungan, ruang, user, group, alat, login, profil
 
 urlpatterns = [
     path('', dashboard.index, name='dashboard'),
     path('login', login.index, name='login'),
     path('logout', login.logout, name='logout'),
+    path('profil', profil.index, name='profil'),
     path('pengunjung', pengunjung.index, name='pengunjung'),
     path('pengunjung/tambah', pengunjung.tambah, name='pengunjung_tambah'),
     path('pengunjung/data_pengunjung', pengunjung.data_pengunjung, name='data_pengunjung'),

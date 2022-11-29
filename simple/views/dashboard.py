@@ -19,40 +19,43 @@ def index(request):
 	nov = 0
 	des = 0
 
-	_kunjungan = []
+	kunjungan = []
 
-	data_pengunjung = Pengunjung.objects.all();
+	data_pengunjung = Pengunjung.objects.all()
 	for dp_item in data_pengunjung:
 
-		jml_kp = Kunjungan.objects.filter(id_pengunjung=dp_item['id']).count()
-		_kunjungan.append({
-				'nama':dp_item['nama_pengunjung'],
+		jml_kp = Kunjungan.objects.filter(id_pengunjung=dp_item.id).count()
+		kunjungan.append({
+				'nama':dp_item.nama_pengunjung,
+				'nik': dp_item.nik,
+				'jabatan': dp_item.jabatan_pengunjung,
+				'instansi': dp_item.instansi_pengunjung,
 				'jml':jml_kp
 			})
 
 		tgl = dp_item.sysinsert
 		bulan = tgl.month
-		jan += 1 if tgl == 1 else 0
-		feb += 1 if tgl == 2 else 0
-		mar += 1 if tgl == 3 else 0
-		apr += 1 if tgl == 4 else 0
-		mei += 1 if tgl == 5 else 0
-		jun += 1 if tgl == 6 else 0
-		jul += 1 if tgl == 7 else 0
-		ags += 1 if tgl == 8 else 0
-		sep += 1 if tgl == 9 else 0
-		okt += 1 if tgl == 10 else 0
-		nov += 1 if tgl == 11 else 0
-		des += 1 if tgl == 12 else 0
+		jan += 1 if bulan == 1 else 0
+		feb += 1 if bulan == 2 else 0
+		mar += 1 if bulan == 3 else 0
+		apr += 1 if bulan == 4 else 0
+		mei += 1 if bulan == 5 else 0
+		jun += 1 if bulan == 6 else 0
+		jul += 1 if bulan == 7 else 0
+		ags += 1 if bulan == 8 else 0
+		sep += 1 if bulan == 9 else 0
+		okt += 1 if bulan == 10 else 0
+		nov += 1 if bulan == 11 else 0
+		des += 1 if bulan == 12 else 0
 
 
 	data_ruang = Ruang.objects.all()
-	_ruang = []
+	ruang = []
 	for dr_item in data_ruang:
-		jml_kunjungan_ruang = Kunjungan.filter(id_ruang = dr_item['id']).count()
-		sp = ',' if _ruang != [] else ''
-		_ruang.append({
-				'nama':dr_item['nama_ruang'],
+		jml_kunjungan_ruang = Kunjungan.objects.filter(id_ruang = dr_item.id).count()
+		sp = ',' if ruang != [] else ''
+		ruang.append({
+				'nama':dr_item.nama_ruang,
 				'jml':jml_kunjungan_ruang,
 				'sp':sp
 			});
@@ -71,6 +74,6 @@ def index(request):
 			'okt':okt,
 			'nov':nov,
 			'des':des,
-			'ruang':_ruang,
-			'kunjungan':_kunjungan
+			'ruang':ruang,
+			'kunjungan':kunjungan
 		})

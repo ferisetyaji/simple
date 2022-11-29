@@ -11,15 +11,15 @@
 <h3>Dashboard</h3>
 <div class="clearfix"></div>
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-sm-7">
 		<div class="panel panel-default">
 			<div class="panel-heading" style="background-color: #fff;font-weight:600">Grafik Jumlah Pengunjung</div>
 			<div class="panel-body">
-				<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+				<canvas id="myChart" style="width:100%;"></canvas>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-5">
 		<div class="panel panel-default">
 			<div class="panel-heading" style="background-color: #fff;font-weight:600;border-bottom-color: #fff;">Grafik Penggunaan Ruang</div>
 			<div class="panel-body">
@@ -28,13 +28,42 @@
 		</div>
 	</div>
 </div>
+<div class="panel panel-default">
+	<div class="panel-heading" style="background-color: #fff;font-weight:600">Table Jumlah Kunjungan</div>
+	<div class="panel-body">
+		<table class="table table-bordered" id="myTable">
+			<thead>
+				<tr>
+					<th class="tb-no">No</th>
+					<th>No. KTP</th>
+					<th>Nama Pengunjung</th>
+					<th>Jabatan</th>
+					<th>Instansi</th>
+					<th>Jumlah Kunjungan</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for k_item in kunjungan %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ k_item.nik }}</td>
+					<td>{{ k_item.nama }}</td>
+					<td>{{ k_item.jabatan }}</td>
+					<td>{{ k_item.instansi }}</td>
+					<td>{{ k_item.jml }}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
 
 {% endblock content %}
 {% block jscp %}
 
-var xValues = [{% for don_item in _ruang %}{{ don_item['nama'] }}{% endfor %}];
-var yValues = [55, 49, 44, 24, 15];
-var barColors = ["red"];
+var xValues = [{% for don_item in ruang %}"{{ don_item.nama }}"{{don_item.sp}}{% endfor %}];
+var yValues = [{% for don_item1 in ruang %}{{ don_item1.jml }}{{don_item1.sp}}{% endfor %}];
+var barColors = [{% for don_item2 in ruang %}"green"{{don_item2.sp}}{% endfor %}];
 
 new Chart("myChart1", {
   type: "doughnut",
