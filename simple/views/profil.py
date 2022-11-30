@@ -18,7 +18,7 @@ def index(request):
 			filename = fs.save(myfile.name, myfile)
 			f = Pengguna.objects.filter(id = request.session['id']).update(foto = filename)
 
-		if 'password' in request.POST:
+		if len(request.POST['password']) != 0 :
 			p = Pengguna.objects.filter(id = request.session['id']).update(password = request.POST['password'])
 
 		q = Pengguna.objects.filter(id = request.session['id']).update(
