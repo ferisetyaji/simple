@@ -31,7 +31,7 @@ def index(request):
 			)
 
 		q.save
-		msg = 'success'
+		msg = 'tambah_success'
 
 	if 'edit' in request.POST:
 
@@ -53,7 +53,7 @@ def index(request):
 				nama_alat = alat['nama_alat'],
 				isaktif = request.POST['status']
 			)
-		msg = 'success'
+		msg = 'edit_success'
 
 	data = Ruang.objects.all()
 	alat = 	Alat.objects.filter(isaktif='Aktif').values()

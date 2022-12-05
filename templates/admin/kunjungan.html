@@ -24,6 +24,9 @@
 					<label>Ruang</label>
 					<select class="form-control" name="ruang">
 						<option value="">- Pilih Ruang -</option>
+						{% for r_item in ruang %}
+						<option class="rf-{{ r_item.id }}" value="{{r_item.id}}">{{ r_item.nama_ruang }}</option>
+						{% endfor %}
 					</select>
 				</div>
 			</div>
@@ -126,3 +129,10 @@
   </div>
 </div>
 {% endblock content %}
+{% block jscp %}
+
+{% if s_ruang != '' %}
+$('.rf-{{ s_ruang }}').attr('selected','');
+{% endif %}
+
+{% endblock jscp %}
