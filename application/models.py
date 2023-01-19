@@ -18,6 +18,9 @@ class Kunjungan(models.Model):
 	ruang = models.CharField(max_length=100, default=None, blank=True)
 	waktu_kunjungan = models.DateTimeField(null=True, default=None, blank=True)
 	keterangan_kunjungan = models.TextField(null=True, default=None, blank=True)
+	status = models.CharField(max_length=10, default=None, blank=True)
+	id_kepuasan = models.IntegerField(null=True, default=None, blank=True)
+	kepuasan = models.CharField(max_length=100)
 	sysinsert = models.DateTimeField(null=True, default=None, blank=True)
 
 class Ruang(models.Model):
@@ -48,3 +51,8 @@ class Pengguna(models.Model):
 	isaktif = models.CharField(max_length=10, default=None, blank=True)
 	syscreate = models.DateTimeField(null=True, default=None, blank=True)
 	sysupdate = models.DateTimeField(null=True, default=None, blank=True)
+
+class Kepuasan(models.Model):
+	nama = models.CharField(max_length=100)
+	gambar = models.CharField(max_length=100)
+	isaktif = models.CharField(max_length=10, default=None, blank=True)

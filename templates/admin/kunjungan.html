@@ -51,6 +51,7 @@
 					<th>Keterangan Kunjungan</th>
 					<th>Ruang</th>
 					<th>Waktu Kunjungan</th>
+					<th>Status</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -63,8 +64,10 @@
 					<td>{{ item.keterangan_kunjungan }}</td>
 					<td>{{ item.ruang }}</td>
 					<td>{{ item.waktu_kunjungan }}</td>
+					<td style="{% if item.status == 'Selesai' %}color:green;{% else %}color:orange;{% endif %}">{{ item.status }}</td>
 					<td>
 						<div style="width:82px;margin:0 auto">
+							<button type="button" class="btn btn-pen btn-xs kepuasan-kunjungan" data-id="{{ item.id }}" data-nama-pengunjung="{{ item.nama_pengunjung }}"><i class="fa fa-pencil-alt fa-fw"></i></button>
 							<button type="button" class="btn btn-i btn-xs detail-kunjungan" data-id="{{ item.id }}"><i class="fa fa-info fa-fw"></i></button>
 							<button type="button" class="btn btn-trash btn-xs hapus-kunjungan" data-id="{{ item.id }}"><i class="fa fa-trash fa-fw"></i></button>
 						</div>
@@ -126,8 +129,44 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="modal-kepuasan-kunjungan" tabindex="-1" role="dialog" data-backdrop="" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+      <div class="modal-body">
+          <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/check_circle.png" class="img-modal-warning">
+          <div class="form-group">
+			<div class="row">
+				{% for k_item in kepuasan %}
+				<div class="col-sm-2 kepuasan-item" data-id="{{ k_item.id }}" data-nama="{{ k_item.nama }}">
+					<img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{ k_item.gambar }}" style="width:100%">
+					<div style="margin-top:5px">{{ k_item.nama }}</div>
+				</div>
+				{% endfor %}
+			</div>
+			</div>
+			<form method="post" id="form-kepuasan">
+				<input type="hidden" id="id-kunjungan-kepuasan" name="id_kunjungan">
+				<input type="hidden" id="nama-pengunjung-kepuasan" name="nama_pengunjung">
+				<input type="hidden" id="id-kepuasan" name="id_kepuasan">
+				<input type="hidden" id="nama-kepuasan" name="kepuasan">
+			</form>
+			<div class="form-group">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" style="float:right;">Tutup</button>
+			</div>
+			<div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
 {% block jscp %}
+
+{% if msg == 'kepuasan_success' %}
+
+  $('.content-modal-success').html('<div id="text-modal-warning">Terimakasih sudah memberikan penilaian</div><div class="form-group btn-group-modal-success"><a href="{% url 'kunjungan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+   $('#modal-success').modal('show');
+
+{% endif %}
 
 {% if s_ruang != '' %}
 $('.rf-{{ s_ruang }}').attr('selected','');

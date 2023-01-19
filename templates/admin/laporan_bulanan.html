@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Laporan Bulanan{% endblock %}
+{% block menu %}laporan{% endblock %}
+{% block content %}
+<br>
+<ul class="path">
+	<li>Laporan</li>
+	<li>></li>
+	<li>Laporan Bulanan</li>
+</ul>
+<h3>Laporan Bulanan</h3>
+<div class="clearfix"></div>
+<div class="table-content">
+	<h3>Filter Laporan Bulanan</h3>
+	<br>
+	<form method="post">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Tahun</label>
+					<select class="form-control" name="tahun">
+						<option value="">- Pilih Tahun -</option>
+						{% for r_item in tahun %}<option class="rf-{{ r_item }}" value="{{ r_item }}">{{ r_item }}</option>{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Bulan</label>
+					<select class="form-control" name="bulan">
+						<option value="">- Pilih Bulan -</option>
+						{% for b_item in bulan %}<option class="rb-{{ b_item }}" value="{{ b_item }}">{{ b_item }}</option>{% endfor %}
+					</select>
+				</div>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary" name="cari" value="1" style="float:right">Cari Data</button>
+		<div class="clearfix"></div>
+	</form>
+</div>
+<div class="table-content">
+	<br>
+	<form method="post">
+		<table class="table table-bordered" id="myTable">
+			<thead>
+				<tr>
+					<th class="tb-no">No</th>
+					<th>Nama Pengunjung</th>
+					<th>Instansi</th>
+					<th>Keterangan Kunjungan</th>
+					<th>Ruang</th>
+					<th>Waktu Kunjungan</th>
+					<th>Tingkat Kepuasan</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in kunjungan %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ item.nama_pengunjung }}</td>
+					<td>{{ item.instansi_pengunjung }}</td>
+					<td>{{ item.keterangan_kunjungan }}</td>
+					<td>{{ item.ruang }}</td>
+					<td>{{ item.waktu_kunjungan }}</td>
+					<td>{{ item.kepuasan }}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</form>
+	<div class="clear"></div>
+</div>
+{% endblock content %}
+{% block jscp %}
+
+{% if select_tahun != '' %}
+$('.rf-{{ select_tahun }}').attr('selected','');
+{% endif %}
+
+{% if select_bulan != '' %}
+$('.rb-{{ select_bulan }}').attr('selected','');
+{% endif %}
+
+{% endblock jscp %}

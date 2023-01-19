@@ -36,6 +36,7 @@ def tambah(request):
 				ruang = 'ruang 1',
 				waktu_kunjungan = datetime.datetime.now(),
 				keterangan_kunjungan = request.POST['keterangan'],
+				status = 'Prosess kunjungan',
 				sysinsert = datetime.datetime.now()
 			)
 		k.save

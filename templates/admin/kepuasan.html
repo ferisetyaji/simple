@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% block title %}Referensi Alasan Kepuasan{% endblock %}
+{% block menu %}setting{% endblock %}
+{% block content %}
+<br>
+<ul class="path">
+	<li>Setting</li>
+	<li>></li>
+	<li>Referensi Alasan Kepuasan</li>
+</ul>
+<h3>Referensi Alasan Kepuasan</h3>
+<div class="clearfix"></div>
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah-alasan-kepuasan">Tambah</button>
+<div class="table-content">
+	<br>
+	<form method="post">
+		<table class="table table-bordered" id="myTable">
+			<thead>
+				<tr>
+					<th class="tb-no">No</th>
+					<th>Nama Alasan Kepuasan</th>>
+					<th>Foto Alasan Kepuasan</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in kepuasan %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ item.nama }}</td>
+					<td><img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{ item.gambar }}" alt="foto-alasan-kepuasan" width="100px"></td>
+					<td>{{ item.isaktif }}</td>
+					<td>
+						<div style="width:82px;margin:0 auto">
+							<button type="button" class="btn btn-pen btn-xs edit-alasan-kepuasan" data-id="{{ item.id }}"><i class="fa fa-pencil-alt fa-fw"></i></button>
+							<button type="button" class="btn btn-trash btn-xs hapus-alasan-kepuasan" data-id="{{ item.id }}"><i class="fa fa-trash fa-fw"></i></button>
+						</div>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</form>
+	<div class="clear"></div>
+</div>
+<div class="modal fade" id="modal-tambah-alasan-kepuasan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tambah Data Alasan Kepuasan</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-tambah-alasan-kepuasan" enctype="multipart/form-data">
+			<div class="form-group">
+				<label>Nama Alasan Kepuasan</label>
+				<input type="text" class="form-control" name="nama_alasan_kepuasan" placeholder="Masukan nama Alasan Kepuasan">
+			</div>
+			<div class="form-group">
+				<label>File Upload</label>
+				<input type="file" class="form-control" name="upload">
+			</div>
+			<div class="form-group">
+				<label>Status</label>
+				<select class="form-control" name="status">
+					<option value="">Pilih Status</option>
+					<option>Aktif</option>
+					<option>Tidak Aktif</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" name="tambah" value="1" style="float:right;">Simpan</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+			</div>
+			<div class="clearfix"></div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-edit-alasan-kepuasan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Data Alasan Kepuasan</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-edit-alasan-kepuasan" enctype="multipart/form-data">
+			<div class="form-group">
+				<label>Nama Alasan Kepuasan</label>
+				<input type="text" class="form-control nama_alasan_kepuasan" name="nama_alasan_kepuasan" value="Alasan Kepuasan 1" placeholder="Masukan nama Alasan Kepuasan">
+			</div>
+			<div class="form-group">
+				<label>File Upload</label>
+				<input type="file" class="form-control" name="upload">
+			</div>
+			<div class="form-group">
+				<label>Status</label>
+				<select class="form-control" name="status">
+					<option value="">Pilih Status</option>
+					<option class="aktif">Aktif</option>
+					<option class="tidak-aktif">Tidak Aktif</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary simpan-edit-alasan-kepuasan" name="edit" style="float:right;">Simpan</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+			</div>
+		</form>
+		<div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+{% block jscp %}
+
+{% if msg == 'tambah_success' %}
+
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><a href="{% url 'alasan_kepuasan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+   $('#modal-success').modal('show');
+
+{% endif %}
+
+{% if msg == 'edit_success' %}
+
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><a href="{% url 'alasan_kepuasan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+   $('#modal-success').modal('show');
+
+{% endif %}
+
+$('.edit-alasan_kepuasan').click(function(){
+    var id = $(this).attr('data-id');
+    $('.simpan-edit-user').val(id);
+    $.ajax({
+        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/alasan_kepuasan/detail',
+        type: 'post',
+        data:{id:id},
+        success: function(data){
+            $('.nama_alasan_kepuasan').val(data.nama);
+            if(data.isaktif == 'Aktif'){
+                $('.aktif').attr('selected', '');
+            }else{
+                $('.tidak-aktif').attr('selected', '');
+            }
+
+            $('#modal-edit-alasan-kepuasan').modal('show');
+        }
+    });
+});
+
+{% endblock jscp %}

@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 
-from .views import dashboard, pengunjung, kunjungan, ruang, user, group, alat, login, profil
+from .views import dashboard, pengunjung, kunjungan, ruang, user, group, alat, login, profil, alasan_kepuasan, laporan
 
 urlpatterns = [
     path('', dashboard.index, name='dashboard'),
@@ -52,4 +52,14 @@ urlpatterns = [
     path('alat/edit', alat.edit, name='alat_edit'),
     path('alat/detail', alat.detail, name='alat_detail'),
     path('alat/delete', alat.delete, name='alat_delete'),
+    path('alasan_kepuasan', alasan_kepuasan.index, name='alasan_kepuasan'),
+    path('alasan_kepuasan/tambah', alasan_kepuasan.tambah, name='alasan_kepuasan_tambah'),
+    path('alasan_kepuasan/edit', alasan_kepuasan.edit, name='alasan_kepuasan_edit'),
+    path('alasan_kepuasan/detail', alasan_kepuasan.detail, name='alasan_kepuasan_detail'),
+    path('alasan_kepuasan/delete', alasan_kepuasan.delete, name='alasan_kepuasan_delete'),
+    path('laporan/tahunan', laporan.tahunan, name='laporan_tahunan'),
+    path('laporan/bulanan', laporan.bulanan, name='laporan_bulanan'),
+    path('laporan/harian', laporan.harian, name='laporan_harian'),
+    path('laporan/keterangan_kunjungan', laporan.keterangan_kunjungan, name='keterangan_kunjungan'),
+    path('laporan/kepuasan_kunjungan', laporan.kepuasan_kunjungan, name='kepuasan_kunjungan')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,13 +5,24 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 
-from application.models import Pengunjung, Kunjungan, Ruang
+from application.models import Pengunjung, Kunjungan, Ruang, Kepuasan
 
 
 def index(request):
 	start_date = None
 	end_date = None
 	s_ruang = None
+	msg_kepuasan = None
+
+	if 'kepuasan' in request.POST:
+
+		Kunjungan.objects.filter(id = request.POST['id_kunjungan']).update(
+			status = 'Selesai',
+			id_kepuasan = request.POST['id_kepuasan'],
+			kepuasan = request.POST['kepuasan']
+			)
+
+		msg_kepuasan = 'kepuasan_success'
 
 	data = Kunjungan.objects.all()
 
@@ -33,13 +44,15 @@ def index(request):
 		
 
 	ruang = Ruang.objects.all()
+	kepuasan = Kepuasan.objects.filter(isaktif='true')
 
 	return render(request, 'admin/kunjungan.html', {
 		'kunjungan': data,
 		'dari': start_date,
 		'ke': end_date,
 		'ruang': ruang,
-		's_ruang': s_ruang
+		's_ruang': s_ruang,
+		'kepuasan': kepuasan
 		})
 
 def detail(request):
