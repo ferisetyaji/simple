@@ -66,7 +66,7 @@
 					<td>{{ item.waktu_kunjungan }}</td>
 					<td style="{% if item.status == 'Selesai' %}color:green;{% else %}color:orange;{% endif %}">{{ item.status }}</td>
 					<td>
-						<div style="width:82px;margin:0 auto">
+						<div style="width:119px;margin:0 auto">
 							<button type="button" class="btn btn-pen btn-xs kepuasan-kunjungan" data-id="{{ item.id }}" data-nama-pengunjung="{{ item.nama_pengunjung }}"><i class="fa fa-pencil-alt fa-fw"></i></button>
 							<button type="button" class="btn btn-i btn-xs detail-kunjungan" data-id="{{ item.id }}"><i class="fa fa-info fa-fw"></i></button>
 							<button type="button" class="btn btn-trash btn-xs hapus-kunjungan" data-id="{{ item.id }}"><i class="fa fa-trash fa-fw"></i></button>
@@ -137,7 +137,7 @@
           <div class="form-group">
 			<div class="row">
 				{% for k_item in kepuasan %}
-				<div class="col-sm-2 kepuasan-item" data-id="{{ k_item.id }}" data-nama="{{ k_item.nama }}">
+				<div class="col-sm-3 kepuasan-item" data-id="{{ k_item.id }}" data-nama="{{ k_item.nama }}">
 					<img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{ k_item.gambar }}" style="width:100%">
 					<div style="margin-top:5px">{{ k_item.nama }}</div>
 				</div>

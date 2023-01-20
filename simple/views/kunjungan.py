@@ -44,7 +44,7 @@ def index(request):
 		
 
 	ruang = Ruang.objects.all()
-	kepuasan = Kepuasan.objects.filter(isaktif='true')
+	kepuasan = Kepuasan.objects.filter(isaktif='Aktif')
 
 	return render(request, 'admin/kunjungan.html', {
 		'kunjungan': data,

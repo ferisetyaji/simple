@@ -7,6 +7,22 @@ from django.core import serializers
 
 from application.models import Pengunjung, Kunjungan, Ruang, Kepuasan
 
+def unique(list1):
+ 
+    # initialize a null list
+    unique_list = []
+ 
+    # traverse for all elements
+    for x in list1:
+        # check if exists in unique_list or not
+        if x not in unique_list:
+            unique_list.append(x)
+    # print list
+    data = []
+    for x in unique_list:
+        data.append(x)
+
+    return data
 
 def tahunan(request):
 	tahun = []
@@ -21,6 +37,8 @@ def tahunan(request):
 	if 'cari' in request.POST:
 		select_tahun = request.POST['tahun']
 		data = Kunjungan.objects.filter(waktu_kunjungan__startswith=(request.POST['tahun']))
+
+	tahun = unique(tahun)
 
 	return render(request, 'admin/laporan.html', {
 		'kunjungan': data,
@@ -37,22 +55,30 @@ def bulanan(request):
 	data = Kunjungan.objects.all()
 
 	for item in data:
-
+		print(item.waktu_kunjungan)
 		tahun_item = item.waktu_kunjungan
 		tahun.append(tahun_item.year)
-		bulan.append(tahun_item.strftime("%b"))
+		data_bulan = {
+			'nama':tahun_item.strftime("%b"),
+			'bulan':tahun_item.strftime("%m")
+		}
+		bulan.append(data_bulan)
+		#bulan.append(tahun_item.strftime("%m"))
 
 	if 'cari' in request.POST:
 		select_tahun = request.POST['tahun']
 		select_bulan =  request.POST['bulan']
+		print(select_bulan+'. '+select_tahun)
 		if len(select_tahun) != 0 and len(select_bulan) != 0:
-			data = Kunjungan.objects.filter(waktu_kunjungan__startswith=(request.POST['bulan']+'. '+request.POST['tahun']))
+			data = Kunjungan.objects.filter(waktu_kunjungan__contains=(select_tahun+'-'+select_bulan))
 		else:
 			if len(select_tahun) != 0:
 				data = Kunjungan.objects.filter(waktu_kunjungan__startswith=(request.POST['tahun']))
 			if len(select_bulan) != 0:
 				data = Kunjungan.objects.filter(waktu_kunjungan__startswith=(request.POST['bulan']))
 
+	tahun = unique(tahun)
+	bulan = unique(bulan)
 
 	return render(request, 'admin/laporan_bulanan.html', {
 		'kunjungan': data,
@@ -106,6 +132,8 @@ def keterangan_kunjungan(request):
 				select_ket = request.POST['ket']
 				data = Kunjungan.objects.filter(keterangan_kunjungan__startswith=(request.POST['ket']))
 
+	ket = unique(ket)
+
 	return render(request, 'admin/laporan_keterangan.html', {
 		'kunjungan': data,
 		'ket' : ket,
@@ -138,6 +166,8 @@ def kepuasan_kunjungan(request):
 		else:
 			if request.POST['kep'] != '':
 				data = Kunjungan.objects.filter(kepuasan__startswith=(request.POST['kep']))
+
+	ket = unique(ket)
 
 	return render(request, 'admin/laporan_kepuasan.html', {
 		'kunjungan': data,

@@ -25,6 +25,7 @@ def index(request):
 				gambar = filename,
 				isaktif = request.POST['status']
 			)
+		print(request.POST['status'])
 		q.save
 		msg = 'tambah_success'
 
@@ -36,9 +37,9 @@ def index(request):
 			
 			fs = FileSystemStorage()
 			filename = fs.save(myfile.name, myfile)
-			f = Pengguna.objects.filter(id = request.POST['id']).update(gambar = filename)
+			f = Pengguna.objects.filter(id = request.POST['edit']).update(gambar = filename)
 
-		Kepuasan.objects.filter(id = request.POST['id']).update(
+		Kepuasan.objects.filter(id = request.POST['edit']).update(
 				nama = request.POST['nama_kepuasan'],
 				isaktif = request.POST['status']
 			)

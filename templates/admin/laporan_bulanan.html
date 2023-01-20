@@ -27,7 +27,7 @@
 					<label>Bulan</label>
 					<select class="form-control" name="bulan">
 						<option value="">- Pilih Bulan -</option>
-						{% for b_item in bulan %}<option class="rb-{{ b_item }}" value="{{ b_item }}">{{ b_item }}</option>{% endfor %}
+						{% for b_item in bulan %}{}<option class="rb-{{ b_item.bulan }}" value="{{ b_item.bulan }}">{{ b_item.nama }}</option>{% endfor %}
 					</select>
 				</div>
 			</div>
