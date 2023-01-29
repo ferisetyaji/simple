@@ -17,7 +17,7 @@ def index(request):
 
 		if 'upload' in request.FILES:
 			myfile = request.FILES['upload']
-			
+
 			fs = FileSystemStorage()
 			filename = fs.save(myfile.name, myfile)
 
@@ -44,7 +44,7 @@ def index(request):
 
 		if 'upload' in request.FILES:
 			myfile = request.FILES['upload']
-			
+
 			fs = FileSystemStorage()
 			filename = fs.save(myfile.name, myfile)
 			f = Pengguna.objects.filter(id = request.POST['edit']).update(foto = filename)
@@ -56,7 +56,6 @@ def index(request):
 		q = Pengguna.objects.filter(id = request.POST['edit']).update(
 				nama_pengguna = request.POST['nama'],
 				username = request.POST['username'],
-				password = request.POST['password'],
 				email = request.POST['email'],
 				no_telp = request.POST['no_telp'],
 				id_group = group['id'],

@@ -84,7 +84,6 @@
 			      	<div class="form-group">
 			      		<label>Group</label>
 			      		<select class="form-control" name="group">
-			      			<option value="">Pilih Group</option>
 			      			{% for gitem in grup %}
 			      			<option value="{{ gitem.id }}">{{ gitem.nama_group }}</option>
 			      			{% endfor %}
@@ -97,14 +96,13 @@
 			      	<div class="form-group">
 			      		<label>Status</label>
 			      		<select class="form-control" name="status">
-			      			<option value="">Pilih Status</option>
 			      			<option>Aktif</option>
 			      			<option>Tidak Aktif</option>
 			      		</select>
 			      	</div>
 			    </div>
 			</div>
-		
+
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary simpan-tambah-user" name="tambah" value="1" style="float:right;">Simpan</button>
 			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
@@ -151,7 +149,6 @@
 			      	<div class="form-group">
 			      		<label>Group</label>
 			      		<select class="form-control" name="group">
-			      			<option value="">Pilih Group</option>
 			      			{% for gitem in grup %}
 			      			<option class="g-{{ gitem.id }}" value="{{ gitem.id }}">{{ gitem.nama_group }}</option>
 			      			{% endfor %}
@@ -164,7 +161,6 @@
 			      	<div class="form-group">
 			      		<label>Status</label>
 			      		<select class="form-control" name="status">
-			      			<option value="">Pilih Status</option>
 			      			<option class="aktif">Aktif</option>
 			      			<option class="tidak-aktif">Tidak Aktif</option>
 			      		</select>
@@ -186,7 +182,7 @@
 
 {% if msg == 'success' %}
 
-  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><a href="{% url 'user' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil ditambah.</div><div class="form-group btn-group-modal-success"><a href="{% url 'user' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
    $('#modal-success').modal('show');
 
 {% endif %}

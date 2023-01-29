@@ -67,7 +67,7 @@
 					<td style="{% if item.status == 'Selesai' %}color:green;{% else %}color:orange;{% endif %}">{{ item.status }}</td>
 					<td>
 						<div style="width:119px;margin:0 auto">
-							<button type="button" class="btn btn-pen btn-xs kepuasan-kunjungan" data-id="{{ item.id }}" data-nama-pengunjung="{{ item.nama_pengunjung }}"><i class="fa fa-pencil-alt fa-fw"></i></button>
+							<button type="button" class="btn btn-pen btn-xs kepuasan-kunjungan" data-id="{{ item.id }}" data-nama-pengunjung="{{ item.nama_pengunjung }}"{% if item.status == 'Selesai' %} disabled{% endif %}><i class="fa fa-check fa-fw"></i></button>
 							<button type="button" class="btn btn-i btn-xs detail-kunjungan" data-id="{{ item.id }}"><i class="fa fa-info fa-fw"></i></button>
 							<button type="button" class="btn btn-trash btn-xs hapus-kunjungan" data-id="{{ item.id }}"><i class="fa fa-trash fa-fw"></i></button>
 						</div>
@@ -135,11 +135,17 @@
       <div class="modal-body">
           <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/check_circle.png" class="img-modal-warning">
           <div class="form-group">
+              <h3 style="text-align:center">Silahkan beri penilaian</h3>
+          </div>
+          <br>
+          <div class="form-group">
 			<div class="row">
 				{% for k_item in kepuasan %}
 				<div class="col-sm-3 kepuasan-item" data-id="{{ k_item.id }}" data-nama="{{ k_item.nama }}">
-					<img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{ k_item.gambar }}" style="width:100%">
-					<div style="margin-top:5px">{{ k_item.nama }}</div>
+				    <div style="padding: 15px;border-radius: 4px;border: 1px solid #ddd;box-shadow: 0 0.25rem 0.125rem 0 rgb(0 0 0 / 10%);">
+    					<img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{ k_item.gambar }}" style="width:100%">
+    					<div style="margin-top:5px;text-align:center">{{ k_item.nama }}</div>
+    				</div>
 				</div>
 				{% endfor %}
 			</div>

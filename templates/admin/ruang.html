@@ -66,7 +66,6 @@
 			      	<div class="form-group">
 			      		<label>Nama Alat</label>
 			      		<select class="form-control" name="alat">
-			      			<option value="">Pilih Alat</option>
 			      			{% for gitem in alat %}
 			      			<option value="{{ gitem.id }}">{{ gitem.nama_alat }}</option>
 			      			{% endfor %}
@@ -85,14 +84,13 @@
 			      	<div class="form-group">
 			      		<label>Status</label>
 			      		<select class="form-control" name="status">
-			      			<option value="">Pilih Status</option>
 			      			<option>Aktif</option>
 			      			<option>Tidak Aktif</option>
 			      		</select>
 			      	</div>
 			    </div>
 			</div>
-		
+
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary" name="tambah" value="1" style="float:right;">Simpan</button>
 			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
@@ -121,7 +119,6 @@
 			      	<div class="form-group">
 			      		<label>Nama Alat</label>
 			      		<select class="form-control" name="alat">
-			      			<option value="">Pilih Alat</option>
 			      			{% for gitem in alat %}
 			      			<option class="g-{{ gitem.id }}" value="{{ gitem.id }}">{{ gitem.nama_alat }}</option>
 			      			{% endfor %}
@@ -140,14 +137,13 @@
 			      	<div class="form-group">
 			      		<label>Status</label>
 			      		<select class="form-control" name="status">
-			      			<option value="">Pilih Status</option>
 			      			<option class="aktif">Aktif</option>
 			      			<option class="tidak-aktif">Tidak Aktif</option>
 			      		</select>
 			      	</div>
 			    </div>
 			</div>
-		
+
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary simpan-edit-ruang" name="edit" style="float:right;">Simpan</button>
 			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
@@ -163,14 +159,14 @@
 
 {% if msg == 'tambah_success' %}
 
-  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><a href="{% url 'ruang' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil ditambah.</div><div class="form-group btn-group-modal-success"><a href="{% url 'ruang' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
    $('#modal-success').modal('show');
 
 {% endif %}
 
 {% if msg == 'edit_success' %}
 
-  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><a href="{% url 'ruang' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil diedit.</div><div class="form-group btn-group-modal-success"><a href="{% url 'ruang' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
    $('#modal-success').modal('show');
 
 {% endif %}

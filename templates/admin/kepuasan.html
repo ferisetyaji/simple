@@ -18,8 +18,7 @@
 			<thead>
 				<tr>
 					<th class="tb-no">No</th>
-					<th>Nama Alasan Kunjungan</th>
-					<th>Foto Alasan Kunjungan</th>
+					<th>Nama Ruang</th>
 					<th>Status</th>
 					<th>Action</th>
 				</tr>
@@ -29,7 +28,6 @@
 				<tr>
 					<td>{{ forloop.counter }}</td>
 					<td>{{ item.nama }}</td>
-					<td><img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{ item.gambar }}" alt="foto-alasan-kepuasan" width="100px"></td>
 					<td>{{ item.isaktif }}</td>
 					<td>
 						<div style="width:82px;margin:0 auto">
@@ -45,7 +43,7 @@
 	<div class="clear"></div>
 </div>
 <div class="modal fade" id="modal-tambah-alasan-kepuasan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -53,22 +51,29 @@
       </div>
       <div class="modal-body">
       	<form method="post" id="form-tambah-alasan-kepuasan" enctype="multipart/form-data">
-			<div class="form-group">
-				<label>Nama Alasan Kunjungan</label>
-				<input type="text" class="form-control" name="nama_kepuasan" placeholder="Masukan nama Alasan Kepuasan">
-			</div>
-			<div class="form-group">
-				<label>File Upload</label>
-				<input type="file" class="form-control" name="upload">
-			</div>
-			<div class="form-group">
-				<label>Status</label>
-				<select class="form-control" name="status">
-					<option value="">Pilih Status</option>
-					<option>Aktif</option>
-					<option>Tidak Aktif</option>
-				</select>
-			</div>
+      	    <div class="row">
+      	        <div class="col-sm-6">
+        			<div class="form-group">
+        				<label>Nama Alasan</label>
+        				<input type="text" class="form-control" name="nama_kepuasan" placeholder="Masukan nama Alasan Kepuasan">
+        			</div>
+        		</div>
+        		<div class="col-sm-6">
+        			<div class="form-group">
+        				<label>Status</label>
+        				<select class="form-control" name="status">
+        					<option>Aktif</option>
+        					<option>Tidak Aktif</option>
+        				</select>
+        			</div>
+        		</div>
+        		<div class="col-sm-6">
+        			<div class="form-group">
+        				<label>File Upload</label>
+        				<input type="file" class="form-control" name="upload">
+        			</div>
+        		</div>
+        	</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary" name="tambah" value="1" style="float:right;">Simpan</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
@@ -80,7 +85,7 @@
   </div>
 </div>
 <div class="modal fade" id="modal-edit-alasan-kepuasan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -88,21 +93,28 @@
       </div>
       <div class="modal-body">
       	<form method="post" id="form-edit-alasan-kepuasan" enctype="multipart/form-data">
-			<div class="form-group">
-				<label>Nama Alasan Kunjungan</label>
-				<input type="text" class="form-control nama_alasan_kepuasan" name="nama_kepuasan" value="Alasan Kepuasan 1" placeholder="Masukan nama Alasan Kepuasan">
-			</div>
-			<div class="form-group">
-				<label>File Upload</label>
-				<input type="file" class="form-control" name="upload">
-			</div>
-			<div class="form-group">
-				<label>Status</label>
-				<select class="form-control" name="status">
-					<option value="">Pilih Status</option>
-					<option class="aktif">Aktif</option>
-					<option class="tidak-aktif">Tidak Aktif</option>
-				</select>
+      	    <div class="row">
+      	        <div class="col-sm-6">
+        			<div class="form-group">
+        				<label>Nama Alasan</label>
+        				<input type="text" class="form-control nama_alasan_kepuasan" name="nama_kepuasan" value="Alasan Kepuasan 1" placeholder="Masukan nama Alasan Kepuasan">
+        			</div>
+        		</div>
+        		<div class="col-sm-6">
+        		    <div class="form-group">
+        				<label>Status</label>
+        				<select class="form-control" name="status">
+        					<option class="aktif">Aktif</option>
+        					<option class="tidak-aktif">Tidak Aktif</option>
+        				</select>
+        			</div>
+        		</div>
+        		<div class="col-sm-6">
+        			<div class="form-group">
+        				<label>File Upload</label>
+        				<input type="file" class="form-control" name="upload">
+        			</div>
+        		</div>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary simpan-edit-alasan-kepuasan" name="edit" style="float:right;">Simpan</button>
@@ -119,14 +131,14 @@
 
 {% if msg == 'tambah_success' %}
 
-  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><a href="{% url 'alasan_kepuasan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil ditambah.</div><div class="form-group btn-group-modal-success"><a href="{% url 'alasan_kepuasan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
    $('#modal-success').modal('show');
 
 {% endif %}
 
 {% if msg == 'edit_success' %}
 
-  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil dihapus.</div><div class="form-group btn-group-modal-success"><a href="{% url 'alasan_kepuasan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil diedit.</div><div class="form-group btn-group-modal-success"><a href="{% url 'alasan_kepuasan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
    $('#modal-success').modal('show');
 
 {% endif %}

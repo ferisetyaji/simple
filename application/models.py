@@ -7,6 +7,8 @@ class Pengunjung(models.Model):
 	nik = models.CharField(max_length=50, default=None, blank=True)
 	rfid = models.CharField(max_length=20, default=None, blank=True)
 	keterangan_pengunjung = models.TextField(null=True, default=None, blank=True)
+	id_alasan_kunjungan = models.IntegerField()
+	alasan_kunjungan = models.CharField(max_length=100)
 	sysinsert = models.DateTimeField(null=True, default=None, blank=True)
 	sysupdate = models.DateTimeField(null=True, default=None, blank=True)
 
@@ -55,4 +57,8 @@ class Pengguna(models.Model):
 class Kepuasan(models.Model):
 	nama = models.CharField(max_length=100)
 	gambar = models.CharField(max_length=100)
+	isaktif = models.CharField(max_length=10, default=None, blank=True)
+
+class Alasan_kunjungan(models.Model):
+	nama_alasan = models.CharField(max_length=100)
 	isaktif = models.CharField(max_length=10, default=None, blank=True)

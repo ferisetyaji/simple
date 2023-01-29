@@ -61,9 +61,9 @@
 {% endblock content %}
 {% block jscp %}
 
-var xValues = [{% for don_item in ruang %}"{{ don_item.nama }}"{{don_item.sp}}{% endfor %}];
-var yValues = [{% for don_item1 in ruang %}{{ don_item1.jml }}{{don_item1.sp}}{% endfor %}];
-var barColors = [{% for don_item2 in ruang %}"green"{{don_item2.sp}}{% endfor %}];
+var xValues = [{% for don_item in ruang %}"{{ don_item.nama }}",{% endfor %}];
+var yValues = [{% for don_item1 in ruang %}{{ don_item1.jml }},{% endfor %}];
+var barColors = [{% for don_item2 in ruang %}"green",{% endfor %}];
 
 new Chart("myChart1", {
   type: "doughnut",

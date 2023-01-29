@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% block title %}Referensi Alasan Kunjungan{% endblock %}
+{% block menu %}setting{% endblock %}
+{% block content %}
+<br>
+<ul class="path">
+	<li>Setting</li>
+	<li>></li>
+	<li>Referensi Alasan Kunjungan</li>
+</ul>
+<h3>Referensi Alasan Kunjungan</h3>
+<div class="clearfix"></div>
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah-alasan-kunjungan">Tambah</button>
+<div class="table-content">
+	<br>
+	<form method="post">
+		<table class="table table-bordered" id="myTable">
+			<thead>
+				<tr>
+					<th class="tb-no">No</th>
+					<th>Nama Ruang</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in alasan_kunjungan %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ item.nama_alasan }}</td>
+					<td>{{ item.isaktif }}</td>
+					<td>
+						<div style="width:82px;margin:0 auto">
+							<button type="button" class="btn btn-pen btn-xs edit-alasan-kunjungan" data-id="{{ item.id }}"><i class="fa fa-pencil-alt fa-fw"></i></button>
+							<button type="button" class="btn btn-trash btn-xs hapus-alasan-kunjungan" data-id="{{ item.id }}"><i class="fa fa-trash fa-fw"></i></button>
+						</div>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</form>
+	<div class="clear"></div>
+</div>
+<div class="modal fade" id="modal-tambah-alasan-kunjungan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tambah Data Alasan Kunjungan</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-tambah-alasan-kunjungan" enctype="multipart/form-data">
+      	    <div class="row">
+      	        <div class="col-sm-6">
+        			<div class="form-group">
+        				<label>Nama Alasan</label>
+        				<input type="text" class="form-control" name="nama_alasan" placeholder="Masukan nama Alasan Kunjungan">
+        			</div>
+        		</div>
+        		<div class="col-sm-6">
+        			<div class="form-group">
+        				<label>Status</label>
+        				<select class="form-control" name="status">
+        					<option>Aktif</option>
+        					<option>Tidak Aktif</option>
+        				</select>
+        			</div>
+        		</div>
+        	</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" name="tambah" value="1" style="float:right;">Simpan</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+			</div>
+			<div class="clearfix"></div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal-edit-alasan-kunjungan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Data Alasan Keunjungan</h4>
+      </div>
+      <div class="modal-body">
+      	<form method="post" id="form-edit-alasan-kunjungan" enctype="multipart/form-data">
+      	    <div class="row">
+      	        <div class="col-sm-6">
+        			<div class="form-group">
+        				<label>Nama Alasan</label>
+        				<input type="text" class="form-control nama_alasan_kunjungan" name="nama_alasan" placeholder="Masukan nama Alasan Kunjungan">
+        			</div>
+        		</div>
+        		<div class="col-sm-6">
+        		    <div class="form-group">
+        				<label>Status</label>
+        				<select class="form-control" name="status">
+        					<option class="aktif">Aktif</option>
+        					<option class="tidak-aktif">Tidak Aktif</option>
+        				</select>
+        			</div>
+        		</div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary simpan-edit-alasan-kunjungan" name="edit" style="float:right;">Simpan</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right;margin-right:4px;">Batal</button>
+			</div>
+		</form>
+		<div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+{% block jscp %}
+
+{% if msg == 'tambah_success' %}
+
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Tambah!</div>Data berhasil ditambahkan.</div><div class="form-group btn-group-modal-success"><a href="{% url 'alasan_kunjungan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+   $('#modal-success').modal('show');
+
+{% endif %}
+
+{% if msg == 'edit_success' %}
+
+  $('.content-modal-success').html('<div id="text-modal-warning"><div style="font-size:1.4em;">Edit!</div>Data berhasil diedit.</div><div class="form-group btn-group-modal-success"><a href="{% url 'alasan_kunjungan' %}" class="btn btn-success btn-modal-warning btn-modal-success">OK</a></div>');
+   $('#modal-success').modal('show');
+
+{% endif %}
+
+$('.edit-alasan-kunjungan').click(function(){
+    var id = $(this).attr('data-id');
+    $('.simpan-edit-alasan-kunjungan').val(id);
+    $.ajax({
+        url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/alasan_kunjungan/detail',
+        type: 'post',
+        data:{id:id},
+        success: function(data){
+            $('.nama_alasan_kunjungan').val(data.nama);
+            if(data.isaktif == 'Aktif'){
+                $('.aktif').attr('selected', '');
+            }else{
+                $('.tidak-aktif').attr('selected', '');
+            }
+
+            $('#modal-edit-alasan-kunjungan').modal('show');
+        }
+    });
+});
+
+{% endblock jscp %}

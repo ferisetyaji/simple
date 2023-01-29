@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from application.models import Pengunjung, Ruang, Kunjungan
 
 def index(request):
-	
+
 	jan = 0
 	feb = 0
 	mar = 0
@@ -51,9 +51,17 @@ def index(request):
 
 	data_ruang = Ruang.objects.all()
 	ruang = []
+	r = 0
 	for dr_item in data_ruang:
 		jml_kunjungan_ruang = Kunjungan.objects.filter(id_ruang = dr_item.id).count()
-		sp = ',' if ruang != [] else ''
+
+		if r != 0:
+		    sp = ','
+		else:
+		    sp = ''
+
+		r += 1
+
 		ruang.append({
 				'nama':dr_item.nama_ruang,
 				'jml':jml_kunjungan_ruang,
